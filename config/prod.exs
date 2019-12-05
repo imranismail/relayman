@@ -10,7 +10,7 @@ use Mix.Config
 # which you should run after static files are built and
 # before starting your production server.
 config :relayman, RelaymanWeb.Endpoint,
-  url: [host: "example.com", port: 80],
+  url: [host: "relayman.app.fave.ninja", port: 443],
   check_origin: false,
   cache_static_manifest: "priv/static/cache_manifest.json"
 
