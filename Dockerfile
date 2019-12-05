@@ -3,6 +3,7 @@ FROM elixir:1.9.4-alpine
 WORKDIR /root
 
 ENV MIX_ENV prod
+ENV PATH $PATH:/root/_build/prod/rel/relayman_web/bin
 
 RUN mix local.hex --force && mix local.rebar --force
 
@@ -14,12 +15,3 @@ RUN mix deps.get
 COPY . .
 
 RUN mix release
-
-FROM alpine:latest
-
-WORKDIR /root
-
-ENV MIX_ENV prod
-ENV PATH $PATH:/root/bin
-
-COPY --from=0 /root/_build/prod/rel/relayman_web .
