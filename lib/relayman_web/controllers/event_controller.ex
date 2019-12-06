@@ -2,6 +2,8 @@ defmodule RelaymanWeb.EventController do
   use RelaymanWeb, :controller
   use Parameters
 
+  plug Parameters.Sanitizer
+
   params do
     requires :specversion, :string, default: "1.0"
     requires :id, :string
@@ -15,8 +17,8 @@ defmodule RelaymanWeb.EventController do
   end
 
   def create(conn, params) do
-    topic = "source:#{params["source"]}"
-    event = params["type"]
+    topic = "source:#{params[:source]}"
+    event = params[:type]
 
     Endpoint.broadcast!(topic, event, params)
 
