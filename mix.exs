@@ -45,7 +45,7 @@ defmodule Relayman.MixProject do
   defp releases do
     [
       relayman: [
-        include_erts: false,
+        include_erts: true,
         include_executables_for: [:unix],
         applications: [runtime_tools: :permanent]
       ]
