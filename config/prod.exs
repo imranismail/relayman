@@ -11,8 +11,7 @@ use Mix.Config
 # before starting your production server.
 config :relayman, RelaymanWeb.Endpoint,
   url: [host: "relayman.app.fave.ninja", port: 443],
-  check_origin: false,
-  cache_static_manifest: "priv/static/cache_manifest.json"
+  check_origin: false
 
 # Do not print debug messages in production
 config :logger, level: :info
