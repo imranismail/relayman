@@ -10,7 +10,6 @@ use Mix.Config
 # which you should run after static files are built and
 # before starting your production server.
 config :relayman, RelaymanWeb.Endpoint,
-  url: [host: "relayman.app.fave.ninja", port: 443],
   check_origin: false
 
 # Do not print debug messages in production

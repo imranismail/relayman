@@ -7,8 +7,13 @@ secret_key_base =
     You can generate one by calling: mix phx.gen.secret
     """
 
+port =
+  System.get_env("PORT")
+  |> Kernel.||("4000")
+  |> String.to_integer()
+
 config :relayman, RelaymanWeb.Endpoint,
-  http: [:inet6, port: String.to_integer(System.get_env("PORT") || "4000")],
+  http: [:inet6, port: port],
   secret_key_base: secret_key_base
 
 config :relayman, RelaymanWeb.Endpoint, server: true

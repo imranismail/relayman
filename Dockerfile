@@ -1,17 +1,39 @@
-FROM elixir:1.9.4-alpine
+FROM elixir:1.9.4-alpine AS build
 
-WORKDIR /root
+ENV MIX_ENV=prod
 
-ENV MIX_ENV prod
-ENV PATH $PATH:/root/_build/prod/rel/relayman_web/bin
+RUN apk add --update git build-base
 
-RUN mix local.hex --force && mix local.rebar --force
+WORKDIR /app
 
-COPY mix.lock .
-COPY mix.exs .
+RUN mix local.hex --force && \
+    mix local.rebar --force
+
+COPY mix.exs mix.lock ./
+COPY config config
 
 RUN mix deps.get
+RUN mix deps.compile
 
-COPY . .
+COPY priv priv
+COPY lib lib
+
+RUN mix compile
+
+COPY rel rel
 
 RUN mix release
+
+FROM alpine AS app
+
+RUN apk add --update bash openssl
+
+WORKDIR /app
+
+COPY --from=build /app/_build/prod/rel/relayman ./
+
+RUN chown -R nobody: /app
+USER nobody
+
+ENV HOME=/app
+ENV PATH $PATH:$HOME/bin

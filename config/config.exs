@@ -9,7 +9,6 @@ use Mix.Config
 
 # Configures the endpoint
 config :relayman, RelaymanWeb.Endpoint,
-  url: [host: "localhost"],
   secret_key_base: "a8ltX4m+C7GTfdc4ipR+oezd6mXBvwxPsAV1tE03iQcUudPot7eDU2v+uBBszIur",
   render_errors: [view: RelaymanWeb.ErrorView, accepts: ~w(json)],
   pubsub: [name: Relayman.PubSub, adapter: Phoenix.PubSub.PG2]

@@ -9,7 +9,7 @@ defmodule Relayman.MixProject do
       elixirc_paths: elixirc_paths(Mix.env()),
       compilers: [:phoenix, :gettext] ++ Mix.compilers(),
       start_permanent: Mix.env() == :prod,
-      releases: release(),
+      releases: releases(),
       deps: deps()
     ]
   end
@@ -42,9 +42,9 @@ defmodule Relayman.MixProject do
     ]
   end
 
-  defp release do
+  defp releases do
     [
-      relayman_web: [
+      relayman: [
         include_erts: false,
         include_executables_for: [:unix],
         applications: [runtime_tools: :permanent]
