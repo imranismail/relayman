@@ -38,6 +38,20 @@ channel
 
 ### Produce Event
 
+#### Parameters
+
+```elixir
+requires :specversion, :string, default: "1.0"
+requires :id, :string
+requires :source, :string
+requires :type, :string
+optional :datacontenttype, :string
+optional :dataschema, :string
+optional :subject, :string
+optional :time, :string
+optional :data, :map
+```
+
 ```sh
 curl -X POST \
   http://localhost:4000/events \
