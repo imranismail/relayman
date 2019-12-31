@@ -41,7 +41,7 @@ curl -X POST \
   -d '{"id":"uuid","source":"/outlets/1/orders","type":"created","subject":"1","data":{"id": "1", "items": ["Pizza", "Burger"]}}'
 ```
 
-### Consume Event
+### Subscribing to an Event source
 
 ```js
 import { Socket } from "phoenix";
