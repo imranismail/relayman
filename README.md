@@ -14,7 +14,7 @@ There will be security patches and update if there are any changes to the specif
 
 ## Non Goals
 - Replayability
-- Endpoint security (your operations team should make the `/events` endpoint an internal API)
+- Endpoint security (your operations team should make the `/events` endpoint an internal API to prevent malicious actors from producing event)
 - Socket authentication (this was built primarily to tackle UI updates, so we don't pass any sensitive data other than pointers)
 
 ## Usage
