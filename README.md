@@ -17,15 +17,8 @@ There will be security patches and update if there are any changes to the specif
 - Endpoint security (your operations team should make the `/events` endpoint an internal API to prevent malicious actors from producing event)
 - Socket authentication (this was built primarily to tackle UI updates, so don't pass any sensitive data other than pointers)
 
-## Usage
 
-Start the server
-
-```
-docker run -it -b 4000:4000 imranismail/relayman relayman start
-```
-
-### API Docs
+## API Docs
 
 ```sh
 POST /events {
@@ -39,6 +32,14 @@ POST /events {
   optional :time, :string
   optional :data, :map
 }
+```
+
+## Usage
+
+Start the server
+
+```
+docker run -it -b 4000:4000 imranismail/relayman relayman start
 ```
 
 ### Producing Event
