@@ -1,8 +1,12 @@
 # Relayman
 
-This is a very minimal cloudevents server that can be used for producing events (HTTP) and consuming events (WebSocket through Phoenix Channel).
+Relayman is a minimal CloudEvents server that can be used for producing events via HTTP and consume them by subscribing to an event source using a WebSocket connection.
 
-Don't worry if there are no activities as it is feature complete and very minimal. I will continously apply security patches reported by Github.
+The idea was conceptualized when I was dealing with clients that polls servers that are not built to provide real-time updates to client.
+
+Relayman adheres to the CloudEvents Specification v1.0. There will be little to no activity on this repo as it's considered feature complete.
+
+There will be security patches and update if there are any changes to the specification made by the working group.
 
 # Usage
 
@@ -10,6 +14,31 @@ Start the server
 
 ```
 docker run -it -b 4000:4000 imranismail/relayman relayman start
+```
+
+### API Docs
+
+```sh
+POST /events {
+  requires :specversion, :string, default: "1.0"
+  requires :id, :string
+  requires :source, :string
+  requires :type, :string
+  optional :datacontenttype, :string
+  optional :dataschema, :string
+  optional :subject, :string
+  optional :time, :string
+  optional :data, :map
+}
+```
+
+### Producing Event
+
+```sh
+curl -X POST \
+  http://localhost:4000/events \
+  -H 'Content-Type: application/json' \
+  -d '{"id":"uuid","source":"/outlets/1/orders","type":"created","subject":"1","data":{"id": "1", "items": ["Pizza", "Burger"]}}'
 ```
 
 ### Consume Event
@@ -34,27 +63,4 @@ channel
   .receive("timeout", () =>
     console.log("Networking issue. Still waiting...")
   );
-```
-
-### Produce Event
-
-#### Parameters
-
-```elixir
-requires :specversion, :string, default: "1.0"
-requires :id, :string
-requires :source, :string
-requires :type, :string
-optional :datacontenttype, :string
-optional :dataschema, :string
-optional :subject, :string
-optional :time, :string
-optional :data, :map
-```
-
-```sh
-curl -X POST \
-  http://localhost:4000/events \
-  -H 'Content-Type: application/json' \
-  -d '{"id":"uuid","source":"/outlets/1/orders","type":"created","subject":"1","data":{"id": "1", "items": ["Pizza", "Burger"]}}'
 ```
