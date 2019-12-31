@@ -20,8 +20,8 @@ There will be security patches and update if there are any changes to the specif
 
 ## API Docs
 
-```sh
-POST /events {
+```elixir
+params do
   requires :specversion, :string, default: "1.0"
   requires :id, :string
   requires :source, :string
@@ -31,7 +31,7 @@ POST /events {
   optional :subject, :string
   optional :time, :string
   optional :data, :map
-}
+end
 ```
 
 ## Usage
