@@ -8,7 +8,16 @@ Relayman adheres to the CloudEvents Specification v1.0. There will be little to 
 
 There will be security patches and update if there are any changes to the specification made by the working group.
 
-# Usage
+## Goals
+- Stateless
+- Zero opinions
+
+## Non Goals
+- Replayability
+- Endpoint security (your operations team should make the `/events` endpoint an internal API)
+- Socket authentication (this was built primarily to tackle UI updates, so we don't pass any sensitive data other than pointers)
+
+## Usage
 
 Start the server
 
@@ -38,7 +47,7 @@ POST /events {
 curl -X POST \
   http://localhost:4000/events \
   -H 'Content-Type: application/json' \
-  -d '{"id":"uuid","source":"/outlets/1/orders","type":"created","subject":"1","data":{"id": "1", "items": ["Pizza", "Burger"]}}'
+  -d '{"id":"uuid","source":"/outlets/1/orders","type":"created","subject":"1","data":{"id": "1"}}'
 ```
 
 ### Subscribing to an Event source
