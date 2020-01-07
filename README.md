@@ -45,6 +45,8 @@ docker run -it -b 4000:4000 imranismail/relayman relayman start
 ### Producing Event
 
 ```sh
+# create a cloudevent
+# note: source and type denotes where the event will be published to
 curl -X POST \
   http://localhost:4000/events \
   -H 'Content-Type: application/json' \
@@ -55,17 +57,17 @@ curl -X POST \
 
 ```js
 import { Socket } from "phoenix";
-
+# setup a socket instance
 let socket = new Socket("ws://localhost:4000/socket");
-
-socket.connect();
-
+# setup a channel
 let channel = socket.channel("source:/outlets/1/orders");
-
+# connect to socket
+socket.connect();
+# listen on events within channel
 channel.on("created", orderCreatedEvent => {
   console.log("Got an order", orderCreatedEvent);
 });
-
+# join channel
 channel
   .join()
   .receive("ok", ({ messages }) => console.log("catching up", messages))
