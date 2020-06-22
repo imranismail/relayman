@@ -11,7 +11,7 @@ use Mix.Config
 config :relayman, RelaymanWeb.Endpoint,
   secret_key_base: "a8ltX4m+C7GTfdc4ipR+oezd6mXBvwxPsAV1tE03iQcUudPot7eDU2v+uBBszIur",
   render_errors: [view: RelaymanWeb.ErrorView, accepts: ~w(json)],
-  pubsub: [name: Relayman.PubSub, adapter: Phoenix.PubSub.PG2]
+  pubsub_server: RelaymanWeb.PubSub
 
 # Configures Elixir's Logger
 config :logger, :console,
