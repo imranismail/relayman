@@ -11,12 +11,12 @@ There will be security patches and update if there are any changes to the specif
 ## Goals
 - Stateless
 - Zero opinions
+- At most once guarantee for message delivery
 
 ## Non Goals
 - Replayability
 - Endpoint security (your operations team should make the `/events` endpoint an internal API to prevent malicious actors from producing event)
 - Socket authentication (this was built primarily to tackle UI updates, so don't pass any sensitive data other than pointers)
-
 
 ## API Docs
 
