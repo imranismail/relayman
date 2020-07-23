@@ -39,4 +39,11 @@ defmodule Redis do
     end
   end
 
+  def command(cmd, opts \\ []) do
+    Redix.command(__MODULE__, cmd, opts)
+  end
+
+  def transaction(cmds) do
+    Redix.transaction_pipeline(__MODULE__, cmds)
+  end
 end
