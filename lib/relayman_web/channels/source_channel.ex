@@ -13,7 +13,6 @@ defmodule RelaymanWeb.SourceChannel do
            Map.get(params, "last_event_id"),
          {:ok, events} when is_list(events) <-
            EventStore.read_from(socket.assigns.source, params["last_event_id"]) do
-      IO.inspect(events)
       push(socket, "events", %{data: events})
     end
 
