@@ -3,8 +3,6 @@ defmodule Relayman.Task do
 
   require Logger
 
-  def prune_sources, do: prune!()
-
   def prune! do
     perform(fn ->
       Logger.info(inspect(EventStore.prune!()))
