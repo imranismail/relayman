@@ -35,10 +35,14 @@ defmodule Relayman.MixProject do
     [
       {:phoenix, "~> 1.5.0"},
       {:phoenix_pubsub, "~> 2.0"},
+      {:phoenix_pubsub_redis, "~> 3.0"},
       {:plug_cowboy, "~> 2.1"},
       {:gettext, "~> 0.11"},
       {:jason, "~> 1.0"},
-      {:parameters, "~> 2.0"}
+      {:parameters, "~> 2.0"},
+      {:elixir_uuid, "~> 1.2"},
+      {:redix, ">= 0.0.0"},
+      {:castore, ">= 0.0.0"}
     ]
   end
 
