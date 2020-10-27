@@ -1,4 +1,4 @@
-FROM elixir:1.10-alpine AS build
+FROM hexpm/elixir:1.11.1-erlang-22.2.1-alpine-3.12.0 AS build
 
 ENV MIX_ENV=prod
 
