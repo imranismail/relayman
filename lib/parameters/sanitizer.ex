@@ -9,6 +9,7 @@ defmodule Parameters.Sanitizer do
     case Parameters.params_for(conn) do
       {:ok, params} ->
         Map.put(conn, :params, params)
+
       {:error, changeset} ->
         errors = errors_from_changeset(changeset)
 
