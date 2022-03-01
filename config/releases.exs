@@ -13,7 +13,7 @@ port =
   |> String.to_integer()
 
 config :relayman, RelaymanWeb.Endpoint,
-  http: [:inet6, port: port],
+  http: [ip: {0, 0, 0, 0}, port: port],
   secret_key_base: secret_key_base
 
 config :relayman, RelaymanWeb.Endpoint,
