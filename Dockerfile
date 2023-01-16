@@ -1,4 +1,4 @@
-FROM hexpm/elixir:1.11.1-erlang-22.2.1-alpine-3.12.0 AS build
+FROM hexpm/elixir:1.14.2-erlang-24.3.4.7-alpine-3.16.3 AS build
 
 ENV MIX_ENV=prod
 
@@ -24,9 +24,9 @@ COPY rel rel
 
 RUN mix release
 
-FROM alpine AS app
+FROM alpine:latest AS app
 
-RUN apk add --update bash openssl
+RUN apk add --update --no-cache bash libcrypto1.1 libstdc++
 
 WORKDIR /app
 
