@@ -2,6 +2,8 @@ defmodule RelaymanWeb.EventController do
   use RelaymanWeb, :controller
   use Parameters
 
+  alias Relayman.EventStore
+
   plug Parameters.Sanitizer
 
   params do
@@ -17,13 +19,10 @@ defmodule RelaymanWeb.EventController do
   end
 
   def create(conn, params) do
-    topic = "source:#{params[:source]}"
-    event = params[:type]
-
-    Endpoint.broadcast!(topic, event, params)
+    {:ok, event} = EventStore.create(params)
 
     conn
     |> put_status(:created)
-    |> json(params)
+    |> json(event)
   end
 end
