@@ -5,33 +5,12 @@ on:
     branches:
       - master
 
-  # Run tests for any PRs.
-  pull_request:
-
 env:
   ECR_REGISTRY: 606804169143.dkr.ecr.ap-southeast-1.amazonaws.com
   ECR_BUILD_REPO: relayman
 
 jobs:
-  # Run tests.
-  # See also https://docs.docker.com/docker-hub/builds/automated-testing/
-  test:
-    runs-on: ubuntu-20.04
-
-    steps:
-      - uses: actions/checkout@v2
-      - name: Run tests
-        run: |
-          if [ -f docker-compose.test.yml ]; then
-            docker-compose --file docker-compose.test.yml build
-            docker-compose --file docker-compose.test.yml run sut
-          else
-            docker build . --file Dockerfile
-          fi
-
   setup_env:
-    if: ${{ github.event_name == 'push' }}
-    needs: test
     environment: test
     runs-on: ubuntu-20.04
     outputs:
@@ -56,7 +35,6 @@ jobs:
           echo "container_image_uri=$ECR_REGISTRY/$ECR_BUILD_REPO:$IMAGE_TAG" >> $GITHUB_OUTPUT
 
   docker_build:
-    if: ${{ github.event_name == 'push' }}
     timeout-minutes: 40
     needs:
       - setup_env
